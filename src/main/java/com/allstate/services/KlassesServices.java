@@ -21,4 +21,8 @@ public class KlassesServices {
     public Klasses findById(int id){
         return this.klassRepository.findOne(id);
     }
+
+    public Klasses findByName(String name){
+        return this.klassRepository.findByName(name);
+    }
 }

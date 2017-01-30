@@ -35,7 +35,7 @@ public class StudentServiceTest {
         Student student = new Student();
         student.setEmail("abc@gmail.com");
         Student after = this.studentService.create(student);
-        assertEquals(1, after.getId());
+        assertEquals(5, after.getId());
         assertEquals(0, after.getVersion());
         assertEquals("abc@gmail.com", after.getEmail());
     }
@@ -45,7 +45,7 @@ public class StudentServiceTest {
         Student student = new Student();
         student.setEmail("pqr@gmail.com");
         Student after = this.studentService.create(student);
-        Student result = this.studentService.findById(1);
+        Student result = this.studentService.findById(5);
         assertEquals("pqr@gmail.com", result.getEmail());
     }
 
@@ -55,7 +55,7 @@ public class StudentServiceTest {
         student.setEmail("xyz@gmail.com");
         Student after = this.studentService.create(student);
         Student result = this.studentService.findByEmail("xyz@gmail.com");
-        assertEquals(1, result.getId());
+        assertEquals(5, result.getId());
     }
 
 

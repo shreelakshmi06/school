@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -16,6 +17,13 @@ public class Student {
     private String email;
     private Date created;
     private Date modified;
+
+    public Student() {
+    }
+
+    public Student(String email) {
+        this.email = email;
+    }
 
     @Id
     @GeneratedValue
@@ -34,6 +42,7 @@ public class Student {
         this.version = version;
     }
 
+    @Size(min = 3)
     @Column(nullable = false)
     public String getEmail() {
         return email;

@@ -5,6 +5,8 @@ import com.allstate.repositories.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentService {
     private IStudentRepository studentRepository;
@@ -22,9 +24,9 @@ public class StudentService {
         return this.studentRepository.findOne(id);
     }
 
-    public Iterable<Student> findAll(){
-        return this.studentRepository.findAll();
-    }
+//    public List<Student> findAll(){
+//        return this.studentRepository.findAll();
+//    }
 
     public Student findByEmail(String email){
         return this.studentRepository.findByEmail(email);

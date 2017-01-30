@@ -1,13 +1,17 @@
 package com.allstate.entities;
 
 import com.allstate.Enums.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "teachers")
@@ -17,10 +21,19 @@ public class Teacher {
     private int version;
     private String name;
     private int age;
-    private Gender sex;
+    private Gender gender;
     private Date created;
     private Date modified;
+    private List<Klasses> klasses;
 
+    public Teacher() {
+    }
+
+    public Teacher(String name, int age, Gender gender) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
     @Id
     @GeneratedValue
     public int getId() {
@@ -38,6 +51,7 @@ public class Teacher {
         this.version = version;
     }
 
+    @Size(min = 1)
     @Column(nullable = false)
     public String getName() {
         return name;
@@ -46,6 +60,8 @@ public class Teacher {
         this.name = name;
     }
 
+    @Min(value = 21)
+    @NotNull
     public int getAge() {
         return age;
     }
@@ -56,11 +72,11 @@ public class Teacher {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "ENUM('MALE','FEMALE')")
-    public Gender getSex() {
-        return sex;
+    public Gender getGender() {
+        return gender;
     }
-    public void setSex(Gender sex) {
-        this.sex = sex;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     @CreationTimestamp
@@ -77,5 +93,14 @@ public class Teacher {
     }
     public void setModified(Date modified) {
         this.modified = modified;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+    @JsonIgnore
+    public List<Klasses> getKlasses(){
+        return klasses;
+    }
+    public void setKlasses(List<Klasses> klasses){
+        this.klasses = klasses;
     }
 }

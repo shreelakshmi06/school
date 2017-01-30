@@ -1,9 +1,12 @@
 package com.allstate.services;
 
+import com.allstate.Enums.Gender;
 import com.allstate.entities.Teacher;
 import com.allstate.repositories.ITeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TeacherService {
@@ -22,11 +25,15 @@ public class TeacherService {
         return this.teacherRepository.findOne(id);
     }
 
-    public Iterable<Teacher> findByGender(String gender){
+    public List<Teacher> findByGender(Gender gender){
         return this.teacherRepository.findByGender(gender);
     }
 
-    public Iterable<Teacher> findOlderThanAge(int age){
-        return this.teacherRepository.findOlderThanAge(age);
+    public List<Teacher> findOlderThanAge(int age){
+        return this.teacherRepository.findByAgeGreaterThan(age);
+    }
+
+    public Teacher findByName(String name){
+        return this.teacherRepository.findByName(name);
     }
 }

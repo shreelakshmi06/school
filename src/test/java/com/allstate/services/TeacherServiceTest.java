@@ -38,7 +38,7 @@ public class TeacherServiceTest {
         Teacher teacher = new Teacher();
         teacher.setName("chyld");
         teacher.setAge(30);
-        teacher.setSex(Gender.MALE);
+        teacher.setGender(Gender.MALE);
         Teacher after = this.teacherService.create(teacher);
         assertEquals(5, after.getId());
         assertEquals("chyld", after.getName());
@@ -54,7 +54,7 @@ public class TeacherServiceTest {
 
     @Test
     public void shouldFindByGender() throws Exception {
-        List<Teacher> teachers = (List) this.teacherService.findByGender("MALE");
+        List<Teacher> teachers = this.teacherService.findByGender(Gender.MALE);
         assertEquals(1, teachers.get(0).getId());
         assertEquals("chyld", teachers.get(0).getName());
         assertEquals(70,teachers.get(0).getAge());
@@ -62,7 +62,7 @@ public class TeacherServiceTest {
 
     @Test
     public void findOlderThanCertainAge() throws Exception {
-        List<Teacher> teachers = (List) this.teacherService.findOlderThanAge(30);
+        List<Teacher> teachers = this.teacherService.findOlderThanAge(30);
         assertEquals(1, teachers.get(0).getId());
         assertEquals("chyld", teachers.get(0).getName());
         assertEquals(70,teachers.get(0).getAge());
